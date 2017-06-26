@@ -7,7 +7,22 @@ var versions = [
 ]
 
 function migrate_1_0_1() {
-  alert('going into migrate_1_0_1');
+  chrome.storage.local.get(null, function(workspaces) {
+    alert('hello');
+    // workspaces.map(function({ workspace, urlList }) {
+    //   urlList.map(function(url) {
+    //     return {
+    //       title: '',
+    //       url,
+    //       active: false,
+    //       pinned: false,
+    //       favIconUrl: ''
+    //     };
+    //   });
+    // });
+
+    // chrome.storage.local.set({...workspaces});
+  });
 }
 
 function migrate_1_0_2() {
@@ -31,8 +46,6 @@ function migrate() {
     versions.forEach(function({version, callback}) {
       if(version > currentDBVersion) {
         callback();
-        chrome.storage.local.set({'db:version': version}, function() {
-        });
       }
     });
   });
